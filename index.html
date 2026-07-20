@@ -16,6 +16,9 @@
                 extend: {
                     fontFamily: {
                         sans: ['Tajawal', 'sans-serif'],
+                    },
+                    colors: {
+                        brandRed: '#ff0000', // لون أحمر مقارب للوجو لو حبيت تستخدمه
                     }
                 }
             }
@@ -78,7 +81,7 @@
     <main class="pt-32 pb-16 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center min-h-[80vh]">
         <div class="w-full h-[500px] md:h-[600px] rounded-3xl overflow-hidden relative shadow-2xl group cursor-pointer">
             
-            <!-- صورة الشماعات الأولى -->
+            <!-- صورة الشماعات -->
             <img src="https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcS2Lhl5NND_5Mklgus0rRjclY0Ohc8TYNZNFqYPV0G-kosDMI3w1jP-0xaC2neNY256UVcWUaO0l0IQDlM" 
                  alt="Summer T-shirts Collection" 
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
@@ -97,46 +100,58 @@
         </div>
     </main>
 
-    <!-- Footer بعد التعديل (لون مختلف، وتواصل مباشر فقط) -->
-    <footer class="bg-neutral-900 text-white pt-12 pb-8 px-4 sm:px-6 lg:px-8 mt-16 font-sans border-t border-neutral-800">
-        <div class="max-w-4xl mx-auto flex flex-col items-center justify-center text-center">
+    <!-- Footer بعد التعديل (خلفية سوداء بالكامل لتندمج مع اللوجو) -->
+    <footer class="bg-black text-white pt-16 pb-8 px-4 sm:px-6 lg:px-8 mt-16 font-sans border-t border-neutral-900 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div class="max-w-5xl mx-auto flex flex-col items-center justify-center text-center">
+            
+            <!-- لوجو البراند -->
+            <div class="mb-10 hover:scale-105 transition-transform duration-500">
+                <img src="image_f4ba09.png" alt="Limited Edition Logo" class="w-48 md:w-64 mx-auto object-contain">
+            </div>
             
             <h3 class="font-bold text-2xl mb-8 text-gray-100">تواصل معنا</h3>
             
+            <!-- زراير التواصل الفعالة -->
             <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
                 
                 <!-- زرار فيسبوك -->
-                <a href="#" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 px-6 py-3 rounded-full transition-colors border border-white/10" title="تواصل فيسبوك">
+                <a href="https://www.facebook.com/share/19RXHDpkHZ/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white/5 hover:bg-[#1877F2] px-6 py-3 rounded-full transition-colors border border-white/10" title="تواصل فيسبوك">
                     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     <span class="font-medium text-lg">تواصل فيسبوك</span>
                 </a>
                 
-                <!-- زرار واتساب -->
-                <a href="#" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 px-6 py-3 rounded-full transition-colors border border-white/10" title="تواصل واتساب">
-                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.013 2.01c-5.506 0-9.98 4.475-9.98 9.982 0 1.761.458 3.486 1.332 5.006L2.01 22l5.127-1.344c1.464.793 3.123 1.21 4.876 1.21 5.508 0 9.982-4.475 9.982-9.984 0-5.507-4.474-9.982-9.982-9.982zm5.723 14.364c-.24.675-1.393 1.29-1.925 1.353-.513.06-1.168.106-3.411-.822-2.67-1.11-4.394-3.83-4.526-4.004-.132-.175-1.077-1.433-1.077-2.733 0-1.299.675-1.936.915-2.203.24-.265.525-.33.696-.33.172 0 .344.002.492.008.156.006.368-.06.575.438.21.503.712 1.737.773 1.86.06.122.102.267.016.438-.088.172-.132.278-.265.432-.131.155-.278.332-.397.46-.133.14-.27.29-.115.556.155.266.69 1.137 1.478 1.84.106.094.217.182.333.264.675.584 1.258.744 1.533.877.275.132.438.105.6-.076.162-.18.696-.807.88-1.085.185-.278.368-.231.611-.14.244.09 1.545.727 1.81.859.264.133.44.198.503.31.064.113.064.655-.176 1.33z"/></svg>
-                    <span class="font-medium text-lg">تواصل واتساب</span>
-                </a>
-                
                 <!-- زرار انستجرام -->
-                <a href="#" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 px-6 py-3 rounded-full transition-colors border border-white/10" title="تواصل انستجرام">
+                <a href="https://www.instagram.com/limit_ed2026?igsh=MTVpMzBrMHByZm5qNg==" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white/5 hover:bg-[#E4405F] px-6 py-3 rounded-full transition-colors border border-white/10" title="تواصل انستجرام">
                     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
                     <span class="font-medium text-lg">تواصل انستجرام</span>
                 </a>
 
                 <!-- زرار تيك توك -->
-                <a href="#" class="flex items-center gap-3 bg-white/5 hover:bg-white/10 px-6 py-3 rounded-full transition-colors border border-white/10" title="تواصل تيك توك">
+                <a href="https://www.tiktok.com/@limited.2026?_r=1&_t=ZS-97st2I1MxfD" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white/5 hover:bg-[#000000] hover:border-white/50 px-6 py-3 rounded-full transition-all border border-white/10" title="تواصل تيك توك">
                     <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.04.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.2c0 1.29-.27 2.6-.83 3.78-.93 1.95-2.8 3.32-4.9 3.65-1.17.18-2.39.06-3.48-.4-1.92-.81-3.32-2.45-3.8-4.46-.3-1.22-.17-2.52.3-3.67.62-1.52 1.83-2.73 3.33-3.23 1.2-.4 2.52-.37 3.68.1.18.07.35.16.51.25V9.45c-2.1-.54-4.4-.1-6.17 1.21-1.74 1.28-2.76 3.32-2.86 5.46-.11 2.22.84 4.39 2.51 5.86 1.8 1.58 4.24 2.21 6.55 1.54 2.61-.75 4.63-2.91 5.09-5.61.16-1.02.14-2.07.14-3.1V4.54c1.3.36 2.67.33 3.97.31z"/></svg>
                     <span class="font-medium text-lg">تواصل تيك توك</span>
+                </a>
+                
+                <!-- زرار واتساب -->
+                <a href="https://wa.me/201014904462" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-white/5 hover:bg-[#25D366] px-6 py-3 rounded-full transition-colors border border-white/10" title="تواصل واتساب">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.013 2.01c-5.506 0-9.98 4.475-9.98 9.982 0 1.761.458 3.486 1.332 5.006L2.01 22l5.127-1.344c1.464.793 3.123 1.21 4.876 1.21 5.508 0 9.982-4.475 9.982-9.984 0-5.507-4.474-9.982-9.982-9.982zm5.723 14.364c-.24.675-1.393 1.29-1.925 1.353-.513.06-1.168.106-3.411-.822-2.67-1.11-4.394-3.83-4.526-4.004-.132-.175-1.077-1.433-1.077-2.733 0-1.299.675-1.936.915-2.203.24-.265.525-.33.696-.33.172 0 .344.002.492.008.156.006.368-.06.575.438.21.503.712 1.737.773 1.86.06.122.102.267.016.438-.088.172-.132.278-.265.432-.131.155-.278.332-.397.46-.133.14-.27.29-.115.556.155.266.69 1.137 1.478 1.84.106.094.217.182.333.264.675.584 1.258.744 1.533.877.275.132.438.105.6-.076.162-.18.696-.807.88-1.085.185-.278.368-.231.611-.14.244.09 1.545.727 1.81.859.264.133.44.198.503.31.064.113.064.655-.176 1.33z"/></svg>
+                    <span class="font-medium text-lg">تواصل واتساب</span>
+                </a>
+
+                <!-- زرار اتصال هاتفي -->
+                <a href="tel:+201014904462" class="flex items-center gap-3 bg-white/5 hover:bg-gray-700 px-6 py-3 rounded-full transition-colors border border-white/10" title="اتصال هاتفي">
+                    <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    <span class="font-medium text-lg">اتصال هاتفي</span>
                 </a>
 
             </div>
         </div>
 
         <!-- حقوق الملكية واسم المطور -->
-        <div class="max-w-7xl mx-auto pt-6 border-t border-white/10 text-center flex flex-col md:flex-row justify-between items-center text-gray-400 gap-4">
+        <div class="max-w-7xl mx-auto pt-6 border-t border-white/10 text-center flex flex-col md:flex-row justify-between items-center text-gray-500 gap-4">
             <p>&copy; 2026 Limited Edition. جميع الحقوق محفوظة.</p>
             <p class="tracking-wide">
-                Developed by <span class="font-bold text-white">eng.elgizawy</span>
+                Developed by <span class="font-bold text-gray-300">eng.elgizawy</span>
             </p>
         </div>
     </footer>
