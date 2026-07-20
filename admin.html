@@ -22,21 +22,6 @@
 </head>
 <body class="bg-neutral-50 dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100 transition-colors duration-300 antialiased min-h-screen flex flex-col justify-between">
 
-    <!-- نافذة إدخال الباسورد (مخفية افتراضياً وتظهر لو مش مسجل دخول) -->
-    <div id="auth-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center px-4">
-        <div class="bg-white dark:bg-neutral-900 w-full max-w-md rounded-3xl p-8 shadow-2xl border border-gray-100 dark:border-neutral-800 text-center">
-            <h2 class="text-2xl font-black mb-2">منطقة محمية للأدمن</h2>
-            <p class="text-gray-500 text-sm mb-6">برجاء إدخال كلمة المرور للمتابعة</p>
-            <form id="password-form" class="flex flex-col gap-4">
-                <input type="password" id="admin-pass" required placeholder="كلمة المرور" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 focus:outline-none focus:border-gray-900 dark:focus:border-white text-center text-lg tracking-widest">
-                <button type="submit" class="w-full py-3.5 bg-black dark:bg-white text-white dark:text-black font-extrabold rounded-xl hover:scale-105 active:scale-95 transition-all">
-                    دخول
-                </button>
-            </form>
-            <button onclick="window.location.href='home.html'" class="mt-4 text-sm text-gray-500 hover:underline">العودة للمتجر</button>
-        </div>
-    </div>
-
     <!-- Navbar -->
     <nav class="w-full bg-white/70 dark:bg-black/70 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,8 +70,8 @@
                 </div>
 
                 <div>
-                    <label class="block font-bold mb-2 text-sm text-gray-600 dark:text-gray-400">رابط صورة المنتج (Image URL)</label>
-                    <input type="url" id="prod-image" required placeholder="حط لينك الصورة هنا" class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 focus:outline-none focus:border-gray-900 dark:focus:border-white transition-colors">
+                    <label class="block font-bold mb-2 text-sm text-gray-600 dark:text-gray-400">اختر صورة المنتج من التليفون</label>
+                    <input type="file" id="prod-image-file" accept="image/*" required class="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-black border border-gray-200 dark:border-gray-800 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gray-200 dark:file:bg-neutral-800 file:text-gray-800 dark:file:text-gray-200 hover:file:bg-gray-300 transition-colors cursor-pointer">
                 </div>
 
                 <button type="submit" id="submit-btn" class="w-full mt-4 py-4 bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-200 text-white dark:text-black font-extrabold text-lg rounded-xl hover:shadow-lg active:scale-95 transition-all">
@@ -101,7 +86,7 @@
         <p>&copy; 2026 Limited Edition - Admin Panel</p>
     </footer>
 
-    <!-- سكريبت الفايربيز والـ Auth -->
+    <!-- سكريبت الفايربيز ورفع الصورة المباشرة -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -118,48 +103,53 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // نظام الحماية بالباسورد (000000)
-        const authModal = document.getElementById('auth-modal');
-        document.getElementById('password-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const enteredPass = document.getElementById('admin-pass').value;
-            
-            if (enteredPass === '000000') {
-                authModal.classList.add('hidden'); // إخفاء نافذة الباسورد لو صح
-            } else {
-                alert('كلمة المرور غير صحيحة!');
-                document.getElementById('admin-pass').value = '';
-            }
-        });
-
         // الوضع الليلي
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
         themeToggleBtn.addEventListener('click', () => {
             htmlElement.classList.toggle('dark');
-            themeIcon.textContent = htmlElement.classList.contains('dark' ) ? '☀️' : '🌙'; 
+            themeIcon.textContent = htmlElement.classList.contains('dark') ? '☀️' : '🌙'; 
         });
 
-        // رفع المنتج
+        // دالة تحويل الصورة لـ Base64 عشان ترفع مباشرة من الفون
+        function convertImageToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        // رفع المنتج والصورة
         document.getElementById('add-product-form').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             const name = document.getElementById('prod-name').value;
             const price = document.getElementById('prod-price').value;
             const category = document.getElementById('prod-category').value;
-            const imageUrl = document.getElementById('prod-image').value;
+            const imageFile = document.getElementById('prod-image-file').files[0];
             const submitBtn = document.getElementById('submit-btn');
 
+            if (!imageFile) {
+                alert('برجاء اختيار صورة للمنتج!');
+                return;
+            }
+
             submitBtn.disabled = true;
-            submitBtn.textContent = 'جاري الرفع...';
+            submitBtn.textContent = 'جاري ضغط الصورة والرفع...';
 
             try {
+                // تحويل الصورة المأخوذة من الهاتف لرابط نصي آمن
+                const base64Image = await convertImageToBase64(imageFile);
+
+                // رفع المنتج للفايربيز
                 await addDoc(collection(db, "products"), {
                     name: name,
                     price: price,
                     category: category,
-                    imageUrl: imageUrl,
+                    imageUrl: base64Image,
                     createdAt: new Date()
                 });
 
@@ -167,7 +157,7 @@
                 document.getElementById('add-product-form').reset();
             } catch (error) {
                 console.error("Error adding document: ", error);
-                alert('حصل خطأ أثناء الرفع.');
+                alert('حصل خطأ أثناء الرفع، تأكد أن حجم الصورة مناسب.');
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'رفع المنتج إلى المتجر';
