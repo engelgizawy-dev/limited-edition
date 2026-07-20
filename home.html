@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Limited Edition | تسوق الآن</title>
     
+    <!-- استدعاء Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- إعدادات Tailwind للوضع الليلي والخطوط -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -19,6 +22,7 @@
         }
     </script>
 
+    <!-- ستايل لإخفاء شريط التمرير والأزرار -->
     <style>
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
@@ -26,7 +30,6 @@
         .category-btn.active { background-color: #000; color: #fff; border-color: #000; }
         html.dark .category-btn.active { background-color: #fff; color: #000; border-color: #fff; }
 
-        /* ستايل زراير المقاسات والألوان لما يتم اختيارها */
         .option-btn.selected { border-color: #000; background-color: #000; color: #fff; }
         html.dark .option-btn.selected { border-color: #fff; background-color: #fff; color: #000; }
     </style>
@@ -39,20 +42,24 @@
     <nav class="fixed w-full top-0 z-40 bg-white/30 dark:bg-black/40 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
+                
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.location.href='index.html'">
                     <span class="text-3xl font-extrabold tracking-widest uppercase" dir="ltr">Limited Edition</span>
                 </div>
+                
                 <div class="flex items-center gap-4">
-                    <!-- أيقونة السلة -->
-                    <button class="relative p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition flex items-center justify-center">
+                    <!-- أيقونة السلة (بقت لينك لصفحة السلة) -->
+                    <a href="cart.html" class="relative p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition flex items-center justify-center">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         <span id="cart-counter" class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full transform translate-x-1 -translate-y-1">0</span>
-                    </button>
+                    </a>
+                    
                     <!-- زرار الوضع الليلي -->
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition">
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition flex items-center justify-center">
                         <span id="theme-icon" class="text-xl">🌙</span>
                     </button>
                 </div>
+
             </div>
         </div>
     </nav>
@@ -81,16 +88,41 @@
         </div>
     </main>
 
-    <!-- Modal (النافذة المنبثقة لاختيار المقاس واللون) -->
+    <!-- الفوتر -->
+    <footer class="bg-black text-white pt-16 pb-8 px-4 sm:px-6 lg:px-8 mt-16 font-sans border-t border-neutral-900 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+        <div class="max-w-5xl mx-auto flex flex-col items-center justify-center text-center">
+            
+            <h3 class="font-bold text-2xl mb-8 text-gray-100">تواصل معنا</h3>
+            
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-12">
+                <a href="https://www.facebook.com/share/19RXHDpkHZ/?mibextid=wwXIfr" target="_blank" class="flex items-center gap-3 bg-white/5 hover:bg-[#1877F2] px-6 py-3 rounded-full transition-colors border border-white/10"><svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg><span class="font-medium text-lg">تواصل فيسبوك</span></a>
+                <a href="https://www.instagram.com/limit_ed2026?igsh=MTVpMzBrMHByZm5qNg==" target="_blank" class="flex items-center gap-3 bg-white/5 hover:bg-[#E4405F] px-6 py-3 rounded-full transition-colors border border-white/10"><svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg><span class="font-medium text-lg">تواصل انستجرام</span></a>
+                <a href="https://www.tiktok.com/@limited.2026?_r=1&_t=ZS-97st2I1MxfD" target="_blank" class="flex items-center gap-3 bg-white/5 hover:bg-[#000000] hover:border-white/50 px-6 py-3 rounded-full transition-all border border-white/10"><svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.04.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93v7.2c0 1.29-.27 2.6-.83 3.78-.93 1.95-2.8 3.32-4.9 3.65-1.17.18-2.39.06-3.48-.4-1.92-.81-3.32-2.45-3.8-4.46-.3-1.22-.17-2.52.3-3.67.62-1.52 1.83-2.73 3.33-3.23 1.2-.4 2.52-.37 3.68.1.18.07.35.16.51.25V9.45c-2.1-.54-4.4-.1-6.17 1.21-1.74 1.28-2.76 3.32-2.86 5.46-.11 2.22.84 4.39 2.51 5.86 1.8 1.58 4.24 2.21 6.55 1.54 2.61-.75 4.63-2.91 5.09-5.61.16-1.02.14-2.07.14-3.1V4.54c1.3.36 2.67.33 3.97.31z"/></svg><span class="font-medium text-lg">تواصل تيك توك</span></a>
+                <a href="https://wa.me/201014904462" target="_blank" class="flex items-center gap-3 bg-white/5 hover:bg-[#25D366] px-6 py-3 rounded-full transition-colors border border-white/10"><svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.013 2.01c-5.506 0-9.98 4.475-9.98 9.982 0 1.761.458 3.486 1.332 5.006L2.01 22l5.127-1.344c1.464.793 3.123 1.21 4.876 1.21 5.508 0 9.982-4.475 9.982-9.984 0-5.507-4.474-9.982-9.982-9.982zm5.723 14.364c-.24.675-1.393 1.29-1.925 1.353-.513.06-1.168.106-3.411-.822-2.67-1.11-4.394-3.83-4.526-4.004-.132-.175-1.077-1.433-1.077-2.733 0-1.299.675-1.936.915-2.203.24-.265.525-.33.696-.33.172 0 .344.002.492.008.156.006.368-.06.575.438.21.503.712 1.737.773 1.86.06.122.102.267.016.438-.088.172-.132.278-.265.432-.131.155-.278.332-.397.46-.133.14-.27.29-.115.556.155.266.69 1.137 1.478 1.84.106.094.217.182.333.264.675.584 1.258.744 1.533.877.275.132.438.105.6-.076.162-.18.696-.807.88-1.085.185-.278.368-.231.611-.14.244.09 1.545.727 1.81.859.264.133.44.198.503.31.064.113.064.655-.176 1.33z"/></svg><span class="font-medium text-lg">تواصل واتساب</span></a>
+                <a href="tel:+201014904462" class="flex items-center gap-3 bg-white/5 hover:bg-gray-700 px-6 py-3 rounded-full transition-colors border border-white/10"><svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg><span class="font-medium text-lg">اتصال هاتفي</span></a>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-6 border-t border-white/10 text-center flex flex-col md:flex-row justify-between items-center text-gray-500 gap-4">
+            <p>&copy; 2026 Limited Edition. جميع الحقوق محفوظة.</p>
+            <p class="tracking-wide flex items-center justify-center gap-2">
+                Developed by 
+                <a href="https://wa.me/201090747536" target="_blank" class="font-bold text-gray-300 hover:text-[#25D366] transition-colors flex items-center gap-1">
+                    eng.elgizawy
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.013 2.01c-5.506 0-9.98 4.475-9.98 9.982 0 1.761.458 3.486 1.332 5.006L2.01 22l5.127-1.344c1.464.793 3.123 1.21 4.876 1.21 5.508 0 9.982-4.475 9.982-9.984 0-5.507-4.474-9.982-9.982-9.982zm5.723 14.364c-.24.675-1.393 1.29-1.925 1.353-.513.06-1.168.106-3.411-.822-2.67-1.11-4.394-3.83-4.526-4.004-.132-.175-1.077-1.433-1.077-2.733 0-1.299.675-1.936.915-2.203.24-.265.525-.33.696-.33.172 0 .344.002.492.008.156.006.368-.06.575.438.21.503.712 1.737.773 1.86.06.122.102.267.016.438-.088.172-.132.278-.265.432-.131.155-.278.332-.397.46-.133.14-.27.29-.115.556.155.266.69 1.137 1.478 1.84.106.094.217.182.333.264.675.584 1.258.744 1.533.877.275.132.438.105.6-.076.162-.18.696-.807.88-1.085.185-.278.368-.231.611-.14.244.09 1.545.727 1.81.859.264.133.44.198.503.31.064.113.064.655-.176 1.33z"/></svg>
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- المودال (النافذة المنبثقة) -->
     <div id="product-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center px-4 opacity-0 transition-opacity duration-300">
         <div class="bg-white dark:bg-neutral-900 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative transform scale-95 transition-transform duration-300" id="modal-content">
             
-            <!-- زرار الإغلاق -->
             <button onclick="closeModal()" class="absolute top-4 left-4 z-10 p-2 bg-black/50 text-white rounded-full hover:bg-black transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
 
-            <!-- صورة المنتج في المودال -->
             <div class="h-64 w-full bg-gray-200 dark:bg-neutral-800">
                 <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
             </div>
@@ -99,7 +131,6 @@
                 <h3 id="modal-title" class="text-2xl font-bold mb-1">اسم المنتج</h3>
                 <p id="modal-price" class="text-xl font-extrabold text-gray-600 dark:text-gray-300 mb-6">0 EGP</p>
 
-                <!-- اختيار المقاس -->
                 <div class="mb-5">
                     <h4 class="font-bold mb-3">اختر المقاس:</h4>
                     <div class="flex gap-3" id="size-options">
@@ -107,20 +138,19 @@
                         <button class="option-btn size-btn w-12 h-12 flex items-center justify-center rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">M</button>
                         <button class="option-btn size-btn w-12 h-12 flex items-center justify-center rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">L</button>
                         <button class="option-btn size-btn w-12 h-12 flex items-center justify-center rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">XL</button>
+                        <button class="option-btn size-btn w-12 h-12 flex items-center justify-center rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">2XL</button>
                     </div>
                 </div>
 
-                <!-- اختيار اللون -->
                 <div class="mb-8">
                     <h4 class="font-bold mb-3">اختر اللون:</h4>
                     <div class="flex gap-3" id="color-options">
                         <button class="option-btn color-btn px-4 py-2 rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">أسود</button>
                         <button class="option-btn color-btn px-4 py-2 rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">أبيض</button>
-                        <button class="option-btn color-btn px-4 py-2 rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">كحلي</button>
+                        <button class="option-btn color-btn px-4 py-2 rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">ألوان أخرى</button>
                     </div>
                 </div>
 
-                <!-- زرار التأكيد -->
                 <button onclick="confirmAddToCart()" class="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold text-lg rounded-xl hover:scale-105 active:scale-95 transition-transform shadow-lg">
                     تأكيد وإضافة للسلة
                 </button>
@@ -128,7 +158,7 @@
         </div>
     </div>
 
-    <!-- سكريبتات التحكم -->
+    <!-- السكريبتات -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -150,6 +180,13 @@
         let selectedSize = null;
         let selectedColor = null;
 
+        // تحديث عداد السلة من الـ LocalStorage أول ما الصفحة تفتح
+        function updateCartCounter() {
+            const cart = JSON.parse(localStorage.getItem('limited_cart')) || [];
+            document.getElementById('cart-counter').textContent = cart.length;
+        }
+        updateCartCounter();
+
         async function fetchProducts() {
             try {
                 const querySnapshot = await getDocs(collection(db, "products"));
@@ -160,6 +197,8 @@
 
                 if(allProducts.length > 0) {
                     renderProducts(allProducts);
+                } else {
+                    document.getElementById('products-grid').innerHTML = '<div class="col-span-full text-center py-12 text-gray-500 font-bold text-xl">لا توجد منتجات حالياً.</div>';
                 }
             } catch (error) {
                 console.error("Error fetching products: ", error);
@@ -171,14 +210,12 @@
             grid.innerHTML = ''; 
 
             if(productsToRender.length === 0) {
-                grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500 font-bold text-xl">لا توجد منتجات في هذا القسم حالياً.</div>';
+                grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500 font-bold text-xl">لا توجد منتجات في هذا القسم.</div>';
                 return;
             }
 
             productsToRender.forEach(product => {
-                // حولنا الداتا لنص عشان نعرف نبعتها لدالة فتح المودال
                 const productData = encodeURIComponent(JSON.stringify(product));
-                
                 const card = `
                     <div class="group flex flex-col bg-white dark:bg-neutral-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
                         <div class="relative w-full h-72 bg-gray-100 dark:bg-neutral-800 overflow-hidden cursor-pointer" onclick="openModal('${productData}')">
@@ -189,7 +226,7 @@
                             <h3 class="text-lg font-bold mb-2">${product.name || 'بدون اسم'}</h3>
                             <p class="text-xl font-extrabold text-gray-900 dark:text-white mt-auto mb-4">${product.price || '0'} EGP</p>
                             <button onclick="openModal('${productData}')" class="w-full py-3 bg-black dark:bg-white text-white dark:text-black font-bold rounded-xl hover:scale-105 active:scale-95 transition-transform">
-                                عرض التفاصيل والمقاس
+                                اختيار المقاس
                             </button>
                         </div>
                     </div>
@@ -198,7 +235,6 @@
             });
         }
 
-        // منطق الفلاتر
         const categoryButtons = document.querySelectorAll('.category-btn');
         categoryButtons.forEach(button => {
             button.addEventListener('click', (e) => {
@@ -218,24 +254,19 @@
 
         fetchProducts();
 
-        // ---------- لوجيك الـ Modal (النافذة المنبثقة) ---------- //
-        
         window.openModal = function(productDataEncoded) {
             const product = JSON.parse(decodeURIComponent(productDataEncoded));
             selectedProduct = product;
-            selectedSize = null; // تصفير الاختيارات
+            selectedSize = null;
             selectedColor = null;
 
-            // تحديث بيانات المودال
             document.getElementById('modal-img').src = product.imageUrl || 'https://via.placeholder.com/400';
             document.getElementById('modal-title').textContent = product.name;
             document.getElementById('modal-price').textContent = product.price + ' EGP';
 
-            // تصفير شكل الزراير جوه المودال
             document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
             document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
 
-            // إظهار المودال بالأنيميشن
             const modal = document.getElementById('product-modal');
             const modalContent = document.getElementById('modal-content');
             modal.classList.remove('hidden');
@@ -255,7 +286,6 @@
             }, 300);
         }
 
-        // اختيار المقاس
         document.querySelectorAll('.size-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
@@ -264,7 +294,6 @@
             });
         });
 
-        // اختيار اللون
         document.querySelectorAll('.color-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
@@ -273,32 +302,42 @@
             });
         });
 
-        // تأكيد الإضافة للسلة
-        let cartCount = 0;
         window.confirmAddToCart = function() {
-            if(!selectedSize) {
-                alert('عشان خاطري اختار المقاس الأول يا هندسة!');
-                return;
-            }
-            if(!selectedColor) {
-                alert('طب واللون؟ اختار لون عشان نعرف نبعتلك إيه.');
-                return;
+            if(!selectedSize) { alert('عشان خاطري اختار المقاس الأول يا هندسة!'); return; }
+            if(!selectedColor) { alert('طب واللون؟ اختار لون عشان نعرف نبعتلك إيه.'); return; }
+
+            // تجهيز بيانات المنتج للإضافة
+            const cartItem = {
+                id: selectedProduct.id + '-' + selectedSize + '-' + selectedColor, // ID مميز عشان لو اختار نفس المنتج بمقاس تاني
+                name: selectedProduct.name,
+                price: parseFloat(selectedProduct.price),
+                imageUrl: selectedProduct.imageUrl,
+                size: selectedSize,
+                color: selectedColor,
+                quantity: 1
+            };
+
+            // سحب السلة القديمة وتحديثها
+            let cart = JSON.parse(localStorage.getItem('limited_cart')) || [];
+            
+            // التأكد لو المنتج موجود نزود الكمية بس
+            const existingItemIndex = cart.findIndex(item => item.id === cartItem.id);
+            if(existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                cart.push(cartItem);
             }
 
-            // هنا بنزود العداد بتاع السلة كشكل مبدئي
-            cartCount++;
-            document.getElementById('cart-counter').textContent = cartCount;
+            // حفظ في المتصفح
+            localStorage.setItem('limited_cart', JSON.stringify(cart));
             
-            // قفل المودال بعد الإضافة
+            updateCartCounter();
             closeModal();
-            
-            // رسالة تأكيد شيك
             setTimeout(() => {
-                alert(`تم إضافة (${selectedProduct.name} - مقاس ${selectedSize} - لون ${selectedColor}) للسلة بنجاح!`);
-            }, 350);
+                alert(`تم الإضافة بنجاح!`);
+            }, 300);
         }
 
-        // الوضع الليلي
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
