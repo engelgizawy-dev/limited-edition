@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Limited Edition | تسوق الآن</title>
     
-    <!-- استدعاء Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- إعدادات Tailwind للوضع الليلي -->
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -22,97 +19,117 @@
         }
     </script>
 
-    <!-- ستايل لإخفاء شريط التمرير في شريط الأقسام -->
     <style>
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        /* ستايل الزرار النشط في الأقسام */
-        .category-btn.active {
-            background-color: #000;
-            color: #fff;
-            border-color: #000;
-        }
-        html.dark .category-btn.active {
-            background-color: #fff;
-            color: #000;
-            border-color: #fff;
-        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .category-btn.active { background-color: #000; color: #fff; border-color: #000; }
+        html.dark .category-btn.active { background-color: #fff; color: #000; border-color: #fff; }
+
+        /* ستايل زراير المقاسات والألوان لما يتم اختيارها */
+        .option-btn.selected { border-color: #000; background-color: #000; color: #fff; }
+        html.dark .option-btn.selected { border-color: #fff; background-color: #fff; color: #000; }
     </style>
 
-    <!-- استدعاء خطوط جوجل -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="bg-neutral-50 dark:bg-black text-gray-900 dark:text-gray-100 transition-colors duration-300 antialiased selection:bg-gray-900 selection:text-white dark:selection:bg-white dark:selection:text-black">
+<body class="bg-neutral-50 dark:bg-black text-gray-900 dark:text-gray-100 transition-colors duration-300 antialiased relative">
 
-    <!-- Navbar - Glassmorphism -->
-    <nav class="fixed w-full top-0 z-50 bg-white/30 dark:bg-black/40 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+    <!-- Navbar -->
+    <nav class="fixed w-full top-0 z-40 bg-white/30 dark:bg-black/40 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                
-                <!-- اسم البراند -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.location.href='index.html'">
-                    <span class="text-3xl font-extrabold tracking-widest uppercase" dir="ltr">
-                        Limited Edition
-                    </span>
+                    <span class="text-3xl font-extrabold tracking-widest uppercase" dir="ltr">Limited Edition</span>
                 </div>
-
-                <!-- أزرار النافبار (السلة والوضع الليلي) -->
                 <div class="flex items-center gap-4">
-                    
                     <!-- أيقونة السلة -->
                     <button class="relative p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition flex items-center justify-center">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                        <!-- عداد السلة -->
-                        <span class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full transform translate-x-1 -translate-y-1">0</span>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span id="cart-counter" class="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full transform translate-x-1 -translate-y-1">0</span>
                     </button>
-
-                    <!-- زرار الوضع الليلي/الساطع -->
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition flex items-center justify-center">
+                    <!-- زرار الوضع الليلي -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition">
                         <span id="theme-icon" class="text-xl">🌙</span>
                     </button>
                 </div>
-
             </div>
         </div>
     </nav>
 
     <main class="pt-28 pb-16 px-4 sm:px-6 lg:px-8 min-h-screen max-w-7xl mx-auto">
-        
-        <!-- شريط الأقسام (الفلاتر) - شكل أسطوانات -->
+        <!-- شريط الأقسام -->
         <div class="mb-10">
             <h1 class="text-3xl font-bold mb-6">تسوق أحدث المنتجات</h1>
             <div id="categories-container" class="flex overflow-x-auto gap-3 pb-4 scrollbar-hide cursor-grab">
                 <button class="category-btn active whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold transition-all" data-category="الكل">الكل</button>
-                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold hover:bg-gray-100 dark:hover:bg-gray-900 transition-all" data-category="بنطلون">بنطلون</button>
-                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold hover:bg-gray-100 dark:hover:bg-gray-900 transition-all" data-category="شورتات">شورتات</button>
-                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold hover:bg-gray-100 dark:hover:bg-gray-900 transition-all" data-category="تيشيرتات أندية">تيشيرتات أندية</button>
-                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold hover:bg-gray-100 dark:hover:bg-gray-900 transition-all" data-category="تيشيرتات رياضية">تيشيرتات رياضية</button>
-                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold hover:bg-gray-100 dark:hover:bg-gray-900 transition-all" data-category="تيشيرتات حوض">تيشيرتات حوض</button>
-                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold hover:bg-gray-100 dark:hover:bg-gray-900 transition-all" data-category="بولو">بولو</button>
-                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold hover:bg-gray-100 dark:hover:bg-gray-900 transition-all" data-category="تيشيرتات صيفية سادة">تيشيرتات صيفية سادة</button>
+                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold transition-all" data-category="بنطلون">بنطلون</button>
+                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold transition-all" data-category="شورتات">شورتات</button>
+                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold transition-all" data-category="تيشيرتات اندية">تيشيرتات اندية</button>
+                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold transition-all" data-category="تيشيرتات رياضية">تيشيرتات رياضية</button>
+                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold transition-all" data-category="تيشيرتات حوض">تيشيرتات حوض</button>
+                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold transition-all" data-category="بولو">بولو</button>
+                <button class="category-btn whitespace-nowrap px-6 py-2 rounded-full border-2 border-gray-300 dark:border-gray-700 font-bold transition-all" data-category="تيشيرتات صيفية سادة">تيشيرتات صيفية سادة</button>
             </div>
         </div>
 
-        <!-- شبكة عرض المنتجات -->
+        <!-- شبكة المنتجات -->
         <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            <!-- سيتم حقن المنتجات هنا عن طريق الجافاسكريبت -->
-            <div class="col-span-full text-center py-12 text-gray-500" id="loading-message">
-                جاري تحميل المنتجات...
+            <div class="col-span-full text-center py-12 text-gray-500 font-bold text-xl">
+                في انتظار إضافة المنتجات من لوحة التحكم...
             </div>
         </div>
-
     </main>
 
-    <!-- سكريبتات التحكم والفايربيز -->
+    <!-- Modal (النافذة المنبثقة لاختيار المقاس واللون) -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center px-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-neutral-900 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl relative transform scale-95 transition-transform duration-300" id="modal-content">
+            
+            <!-- زرار الإغلاق -->
+            <button onclick="closeModal()" class="absolute top-4 left-4 z-10 p-2 bg-black/50 text-white rounded-full hover:bg-black transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- صورة المنتج في المودال -->
+            <div class="h-64 w-full bg-gray-200 dark:bg-neutral-800">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+            </div>
+
+            <div class="p-6">
+                <h3 id="modal-title" class="text-2xl font-bold mb-1">اسم المنتج</h3>
+                <p id="modal-price" class="text-xl font-extrabold text-gray-600 dark:text-gray-300 mb-6">0 EGP</p>
+
+                <!-- اختيار المقاس -->
+                <div class="mb-5">
+                    <h4 class="font-bold mb-3">اختر المقاس:</h4>
+                    <div class="flex gap-3" id="size-options">
+                        <button class="option-btn size-btn w-12 h-12 flex items-center justify-center rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">S</button>
+                        <button class="option-btn size-btn w-12 h-12 flex items-center justify-center rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">M</button>
+                        <button class="option-btn size-btn w-12 h-12 flex items-center justify-center rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">L</button>
+                        <button class="option-btn size-btn w-12 h-12 flex items-center justify-center rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">XL</button>
+                    </div>
+                </div>
+
+                <!-- اختيار اللون -->
+                <div class="mb-8">
+                    <h4 class="font-bold mb-3">اختر اللون:</h4>
+                    <div class="flex gap-3" id="color-options">
+                        <button class="option-btn color-btn px-4 py-2 rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">أسود</button>
+                        <button class="option-btn color-btn px-4 py-2 rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">أبيض</button>
+                        <button class="option-btn color-btn px-4 py-2 rounded-xl border-2 border-gray-300 dark:border-gray-700 font-bold transition">كحلي</button>
+                    </div>
+                </div>
+
+                <!-- زرار التأكيد -->
+                <button onclick="confirmAddToCart()" class="w-full py-4 bg-black dark:bg-white text-white dark:text-black font-bold text-lg rounded-xl hover:scale-105 active:scale-95 transition-transform shadow-lg">
+                    تأكيد وإضافة للسلة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- سكريبتات التحكم -->
     <script type="module">
-        // استدعاء الفايربيز و Firestore
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -128,10 +145,11 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // متغير لتخزين كل المنتجات عشان الفلترة تتم بسرعة من غير ما نسحب من الداتا بيز تاني
         let allProducts = [];
+        let selectedProduct = null;
+        let selectedSize = null;
+        let selectedColor = null;
 
-        // دالة سحب المنتجات من Firestore
         async function fetchProducts() {
             try {
                 const querySnapshot = await getDocs(collection(db, "products"));
@@ -140,24 +158,17 @@
                     allProducts.push({ id: doc.id, ...doc.data() });
                 });
 
-                // لو مفيش منتجات لسه في الداتابيز، نعرض رسالة
-                if(allProducts.length === 0) {
-                    document.getElementById('products-grid').innerHTML = '<div class="col-span-full text-center py-12 text-gray-500 font-bold text-xl">لا توجد منتجات حالياً. سيقوم الأدمن بإضافتها قريباً.</div>';
-                    return;
+                if(allProducts.length > 0) {
+                    renderProducts(allProducts);
                 }
-
-                // عرض كل المنتجات في البداية
-                renderProducts(allProducts);
             } catch (error) {
                 console.error("Error fetching products: ", error);
-                document.getElementById('products-grid').innerHTML = '<div class="col-span-full text-center py-12 text-red-500 font-bold">حدث خطأ أثناء تحميل المنتجات. تأكد من إعدادات قاعدة البيانات.</div>';
             }
         }
 
-        // دالة عرض المنتجات في الـ HTML
         function renderProducts(productsToRender) {
             const grid = document.getElementById('products-grid');
-            grid.innerHTML = ''; // تفريغ الشبكة القديمة
+            grid.innerHTML = ''; 
 
             if(productsToRender.length === 0) {
                 grid.innerHTML = '<div class="col-span-full text-center py-12 text-gray-500 font-bold text-xl">لا توجد منتجات في هذا القسم حالياً.</div>';
@@ -165,26 +176,20 @@
             }
 
             productsToRender.forEach(product => {
-                // الكارد بتاع المنتج بستايل الجلاس مورفيزم والدارك مود
+                // حولنا الداتا لنص عشان نعرف نبعتها لدالة فتح المودال
+                const productData = encodeURIComponent(JSON.stringify(product));
+                
                 const card = `
                     <div class="group flex flex-col bg-white dark:bg-neutral-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
-                        <!-- صورة المنتج -->
-                        <div class="relative w-full h-72 bg-gray-100 dark:bg-neutral-800 overflow-hidden">
-                            <img src="${product.imageUrl || 'https://via.placeholder.com/400'}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <!-- بادج القسم -->
-                            <span class="absolute top-3 right-3 bg-black/70 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">
-                                ${product.category}
-                            </span>
+                        <div class="relative w-full h-72 bg-gray-100 dark:bg-neutral-800 overflow-hidden cursor-pointer" onclick="openModal('${productData}')">
+                            <img src="${product.imageUrl || 'https://via.placeholder.com/400'}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-black/70 text-white text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm">${product.category}</span>
                         </div>
-                        
-                        <!-- تفاصيل المنتج -->
                         <div class="p-5 flex flex-col flex-grow">
-                            <h3 class="text-lg font-bold mb-2">${product.name || 'اسم المنتج'}</h3>
+                            <h3 class="text-lg font-bold mb-2">${product.name || 'بدون اسم'}</h3>
                             <p class="text-xl font-extrabold text-gray-900 dark:text-white mt-auto mb-4">${product.price || '0'} EGP</p>
-                            
-                            <!-- زرار الإضافة للسلة -->
-                            <button onclick="addToCart('${product.id}')" class="w-full py-3 bg-black dark:bg-white text-white dark:text-black font-bold rounded-xl hover:scale-105 active:scale-95 transition-transform">
-                                أضف للسلة
+                            <button onclick="openModal('${productData}')" class="w-full py-3 bg-black dark:bg-white text-white dark:text-black font-bold rounded-xl hover:scale-105 active:scale-95 transition-transform">
+                                عرض التفاصيل والمقاس
                             </button>
                         </div>
                     </div>
@@ -193,25 +198,15 @@
             });
         }
 
-        // نظام الفلترة عند الضغط على الأسطوانات (الأقسام)
+        // منطق الفلاتر
         const categoryButtons = document.querySelectorAll('.category-btn');
         categoryButtons.forEach(button => {
             button.addEventListener('click', (e) => {
-                // شيل الـ active من كل الزراير
-                categoryButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    btn.classList.add('hover:bg-gray-100', 'dark:hover:bg-gray-900');
-                });
-                
-                // حط الـ active للزرار اللي اداس عليه
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
                 const clickedBtn = e.target;
                 clickedBtn.classList.add('active');
-                clickedBtn.classList.remove('hover:bg-gray-100', 'dark:hover:bg-gray-900');
 
-                // جيب اسم القسم المختار
                 const selectedCategory = clickedBtn.getAttribute('data-category');
-
-                // فلترة المنتجات
                 if (selectedCategory === 'الكل') {
                     renderProducts(allProducts);
                 } else {
@@ -221,28 +216,97 @@
             });
         });
 
-        // سكريبت الوضع الليلي
+        fetchProducts();
+
+        // ---------- لوجيك الـ Modal (النافذة المنبثقة) ---------- //
+        
+        window.openModal = function(productDataEncoded) {
+            const product = JSON.parse(decodeURIComponent(productDataEncoded));
+            selectedProduct = product;
+            selectedSize = null; // تصفير الاختيارات
+            selectedColor = null;
+
+            // تحديث بيانات المودال
+            document.getElementById('modal-img').src = product.imageUrl || 'https://via.placeholder.com/400';
+            document.getElementById('modal-title').textContent = product.name;
+            document.getElementById('modal-price').textContent = product.price + ' EGP';
+
+            // تصفير شكل الزراير جوه المودال
+            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+            document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
+
+            // إظهار المودال بالأنيميشن
+            const modal = document.getElementById('product-modal');
+            const modalContent = document.getElementById('modal-content');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+            }, 10);
+        }
+
+        window.closeModal = function() {
+            const modal = document.getElementById('product-modal');
+            const modalContent = document.getElementById('modal-content');
+            modal.classList.add('opacity-0');
+            modalContent.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // اختيار المقاس
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+                e.target.classList.add('selected');
+                selectedSize = e.target.textContent;
+            });
+        });
+
+        // اختيار اللون
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+                e.target.classList.add('selected');
+                selectedColor = e.target.textContent;
+            });
+        });
+
+        // تأكيد الإضافة للسلة
+        let cartCount = 0;
+        window.confirmAddToCart = function() {
+            if(!selectedSize) {
+                alert('عشان خاطري اختار المقاس الأول يا هندسة!');
+                return;
+            }
+            if(!selectedColor) {
+                alert('طب واللون؟ اختار لون عشان نعرف نبعتلك إيه.');
+                return;
+            }
+
+            // هنا بنزود العداد بتاع السلة كشكل مبدئي
+            cartCount++;
+            document.getElementById('cart-counter').textContent = cartCount;
+            
+            // قفل المودال بعد الإضافة
+            closeModal();
+            
+            // رسالة تأكيد شيك
+            setTimeout(() => {
+                alert(`تم إضافة (${selectedProduct.name} - مقاس ${selectedSize} - لون ${selectedColor}) للسلة بنجاح!`);
+            }, 350);
+        }
+
+        // الوضع الليلي
         const themeToggleBtn = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
         const htmlElement = document.documentElement;
-
         themeToggleBtn.addEventListener('click', () => {
             htmlElement.classList.toggle('dark');
-            if (htmlElement.classList.contains('dark')) {
-                themeIcon.textContent = '☀️'; 
-            } else {
-                themeIcon.textContent = '🌙'; 
-            }
+            themeIcon.textContent = htmlElement.classList.contains('dark') ? '☀️' : '🌙'; 
         });
 
-        // تشغيل دالة جلب المنتجات أول ما الصفحة تحمل
-        fetchProducts();
-
-        // دالة وهمية للسلة (عشان متعملش إيرور لما تدوس على الزرار)
-        window.addToCart = function(productId) {
-            alert('تمت الإضافة للسلة بنجاح يا هندسة!');
-            // هنا ممكن تزود لوجيك يزود الرقم اللي في أيقونة السلة فوق
-        }
     </script>
 </body>
 </html>
