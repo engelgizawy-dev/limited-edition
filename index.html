@@ -1,116 +1,94 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الملابس - Limited Edition</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#0b0f19',
-                        cardBg: 'rgba(17, 24, 39, 0.7)',
-                    }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-darkBg text-white min-h-screen font-sans">
+// app/page.js أو pages/index.js (حسب إصدار Next.js اللي شغال بيه)
+"use client";
 
-    <!-- Header / Navbar -->
-    <header class="border-b border-gray-800 backdrop-blur-md bg-darkBg/80 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <h1 class="text-2xl font-bold tracking-wider text-white">LIMITED<span class="text-indigo-500">.</span></h1>
-            <div class="flex items-center gap-4">
-                <button class="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-xl text-sm transition">سلة المشتريات (0)</button>
+import { useState, useEffect } from "react";
+import Head from "next/head";
+
+export default function Home() {
+  const [darkMode, setDarkMode] = useState(true); // خليت الديفولت وضع ليلي
+
+  // تفعيل الوضع الليلي على مستوى الـ HTML
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+
+  return (
+    <div className="min-h-screen bg-neutral-50 dark:bg-black text-gray-900 dark:text-gray-100 transition-colors duration-300 font-sans">
+      <Head>
+        <title>Limited Edition | Clothing Brand</title>
+      </Head>
+
+      {/* Navbar - Glassmorphism */}
+      <nav className="fixed w-full top-0 z-50 bg-white/30 dark:bg-black/40 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            
+            {/* أزرار النافبار (على اليسار) */}
+            <div className="flex items-center gap-6">
+              <button
+                onClick={() => setDarkMode(!darkMode)}
+                className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+              >
+                {darkMode ? "☀️ ساطع" : "🌙 ليلي"}
+              </button>
+              <a href="#" className="hidden md:block font-medium hover:text-gray-500 transition">تسوق الآن</a>
+              <a href="#" className="hidden md:block font-medium hover:text-gray-500 transition">المجموعات</a>
             </div>
+
+            {/* اسم البراند (على اليمين) */}
+            <div className="flex-shrink-0 flex items-center">
+              <span className="text-3xl font-extrabold tracking-widest uppercase">
+                Limited Edition
+              </span>
+            </div>
+
+          </div>
         </div>
-    </header>
+      </nav>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 py-10">
-        <div class="mb-8">
-            <h2 class="text-3xl font-extrabold tracking-tight">أحدث الإصدارات</h2>
-            <p class="text-gray-400 mt-2">تسوق أحدث تشكيلة من الملابس المصممة خصيصاً لك.</p>
+      {/* Hero Section */}
+      <main className="pt-32 pb-16 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center min-h-[80vh] text-center">
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+          اكتشف هويتك مع <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-gray-900 dark:from-gray-400 dark:to-white">
+            Limited Edition
+          </span>
+        </h1>
+        <p className="mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-400 mb-10">
+          تصميمات فريدة مصنوعة بعناية عشان تعبر عنك. خامات بريميوم وتفاصيل بتعمل الفرق في كل قطعة.
+        </p>
+        
+        <div className="flex gap-4">
+          <button className="px-8 py-4 bg-black dark:bg-white text-white dark:text-black font-bold rounded-full hover:scale-105 transition-transform shadow-lg">
+            تصفح التشكيلة الجديدة
+          </button>
+          <button className="px-8 py-4 bg-transparent border-2 border-black dark:border-white font-bold rounded-full hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors">
+            عن البراند
+          </button>
         </div>
+      </main>
 
-        <!-- Products Grid (هنا المنتجات هتتحقن تلقائياً من الفايربيز) -->
-        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Loading state -->
-            <p class="text-gray-500 col-span-full text-center py-10">جاري تحميل المنتجات...</p>
+      {/* Section Divider (Placeholder for products) */}
+      <section className="max-w-7xl mx-auto px-4 py-16 border-t border-gray-200 dark:border-gray-800">
+        <h2 className="text-3xl font-bold mb-8 text-right">أحدث القطع</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {/* Card 1 */}
+          <div className="group cursor-pointer">
+            <div className="w-full h-96 bg-gray-200 dark:bg-gray-900 rounded-2xl mb-4 overflow-hidden">
+              <div className="w-full h-full bg-gradient-to-tr from-gray-300 to-gray-100 dark:from-gray-800 dark:to-gray-700 group-hover:scale-105 transition-transform duration-500"></div>
+            </div>
+            <div className="flex justify-between items-center px-2">
+              <span className="text-lg font-semibold">1,200 EGP</span>
+              <h3 className="text-xl font-medium">تيشيرت بيزك أسود</h3>
+            </div>
+          </div>
+          {/* ضيف كروت تانية هنا للمنتجات */}
         </div>
-    </main>
-
-    <!-- Firebase SDK & Script -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-        // إعدادات مشروعك الفعلي على Firebase
-        const firebaseConfig = {
-            apiKey: "AIzaSyDqf4HdoP9EocfZLjKUhXHh7-nddWW2uXg",
-            authDomain: "limited-edittion.firebaseapp.com",
-            projectId: "limited-edittion",
-            storageBucket: "limited-edittion.firebasestorage.app",
-            messagingSenderId: "836001119137",
-            appId: "1:836001119137:web:cd08c89dca42982b3d29e0",
-            measurementId: "G-KEDBNT2FZL"
-        };
-
-        // تهيئة الفايربيز
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-
-        const grid = document.getElementById('products-grid');
-
-        // دالة جلب وعرض المنتجات
-        async function loadProducts() {
-            try {
-                const querySnapshot = await getDocs(collection(db, "products"));
-                grid.innerHTML = ""; // تفريغ رسالة التحميل
-
-                if (querySnapshot.empty) {
-                    grid.innerHTML = `<p class="text-gray-500 col-span-full text-center">لا توجد منتجات مضافة حالياً.</p>`;
-                    return;
-                }
-
-                querySnapshot.forEach((doc) => {
-                    const product = doc.data();
-                    
-                    // تصميم كارت المنتج بلغة الجلاسمورفيزم والثيم الداكن
-                    const card = `
-                        <div class="bg-cardBg backdrop-blur-xl border border-gray-800 rounded-2xl overflow-hidden shadow-2xl hover:border-gray-700 transition duration-300 flex flex-col">
-                            <div class="h-72 bg-gray-900 overflow-hidden relative">
-                                <img src="${product.images && product.images[0] ? product.images[0] : 'https://via.placeholder.com/400'}" alt="${product.name}" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-                            </div>
-                            <div class="p-5 flex flex-col flex-grow justify-between">
-                                <div>
-                                    <span class="text-xs text-indigo-400 font-semibold uppercase tracking-wider">${product.category || 'ملابس'}</span>
-                                    <h3 class="text-lg font-bold mt-1 text-white">${product.name}</h3>
-                                    <div class="flex gap-2 mt-3 flex-wrap">
-                                        ${product.sizes ? product.sizes.map(s => `<span class="border border-gray-700 text-xs px-2 py-1 rounded text-gray-300 uppercase">${s}</span>`).join('') : ''}
-                                    </div>
-                                </div>
-                                <div class="mt-5 flex items-center justify-between pt-4 border-t border-gray-800/60">
-                                    <span class="text-xl font-black text-white">${product.price} ج.م</span>
-                                    <button class="bg-white text-darkBg hover:bg-gray-200 px-4 py-2 rounded-xl text-sm font-bold transition">أضف للسلة</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    grid.innerHTML += card;
-                });
-            } catch (error) {
-                console.error("خطأ في جلب المنتجات: ", error);
-                grid.innerHTML = `<p class="text-red-500 col-span-full text-center">حدث خطأ أثناء تحميل المنتجات.</p>`;
-            }
-        }
-
-        loadProducts();
-    </script>
-</body>
-</html>
+      </section>
+    </div>
+  );
+}
